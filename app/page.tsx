@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-50 px-6 py-12 font-sans text-zinc-900">
-      <div className="flex w-full max-w-5xl flex-col gap-8 md:flex-row">
+      <div className="grid w-full max-w-6xl gap-6 md:grid-cols-[320px_1fr]">
         <form
           onSubmit={handleSubmit}
           className="flex w-full flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
@@ -110,7 +110,7 @@ export default function Home() {
 
         <section className="relative w-full overflow-hidden rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
           <div
-            className="relative aspect-video w-full overflow-hidden rounded-xl bg-white"
+            className="relative aspect-video w-full overflow-hidden rounded-xl bg-white md:min-h-[420px]"
             style={{
               backgroundImage: "url('/cert.jpeg')",
               backgroundSize: "cover",
@@ -118,10 +118,10 @@ export default function Home() {
             }}
           >
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-8 text-center">
-              <div className="text-4xl font-semibold text-amber-700 drop-shadow-sm">
+              <div className="text-4xl font-semibold text-amber-700 drop-shadow-sm md:text-5xl">
                 {submitted.name || "Your Name"}
               </div>
-              <div className="text-xl font-medium text-emerald-800 drop-shadow-sm">
+              <div className="text-xl font-medium text-emerald-800 drop-shadow-sm md:text-2xl">
                 {submitted.institution || "Your Institution"}
               </div>
             </div>
@@ -131,11 +131,11 @@ export default function Home() {
           </p>
         </section>
 
-        <section className="flex w-full flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm text-sm text-zinc-700">
+        <section className="flex w-full flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm text-sm text-zinc-700 md:col-span-2">
           <h2 className="text-base font-semibold text-zinc-900">Creator</h2>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 md:flex-row md:items-center md:gap-4">
             <span className="font-medium text-zinc-800">Taufan Fadhilah</span>
-            <span>Phone: 082218339682</span>
+            <span className="text-zinc-600">Phone: 082218339682</span>
             <a
               className="text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-800"
               href="https://cherrypick.studio/"
