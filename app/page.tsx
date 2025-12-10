@@ -130,6 +130,30 @@ export default function Home() {
             Fill the form to place your details on the certificate.
           </p>
         </section>
+
+        <section className="flex w-full flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm text-sm text-zinc-700">
+          <h2 className="text-base font-semibold text-zinc-900">Creator</h2>
+          <div className="flex flex-col gap-1">
+            <span className="font-medium text-zinc-800">Taufan Fadhilah</span>
+            <span>Phone: 082218339682</span>
+            <a
+              className="text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-800"
+              href="https://cherrypick.studio/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              cherrypick.studio
+            </a>
+            <a
+              className="text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-800"
+              href="https://www.instagram.com/taufanfadhilah/?hl=id"
+              target="_blank"
+              rel="noreferrer"
+            >
+              instagram.com/taufanfadhilah
+            </a>
+          </div>
+        </section>
       </div>
     </main>
   );
