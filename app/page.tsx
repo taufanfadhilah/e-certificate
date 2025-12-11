@@ -5,6 +5,24 @@ import { useState, type FormEvent } from "react";
 
 const NAME_Y_RATIO = 0.44;
 const INSTITUTION_Y_RATIO = 0.53;
+const NAME_BASE_SIZE_RATIO = 1 / 22.5; // 20% smaller than previous ~1/18
+const INST_BASE_SIZE_RATIO = 1 / 35; // 20% smaller than previous ~1/28
+
+const fitTextToWidth = (
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  baseSize: number,
+  fontFamily: string,
+  maxWidth: number
+) => {
+  let fontSize = baseSize;
+  ctx.font = `${fontSize}px ${fontFamily}`;
+  while (ctx.measureText(text).width > maxWidth && fontSize > baseSize * 0.6) {
+    fontSize -= 1;
+    ctx.font = `${fontSize}px ${fontFamily}`;
+  }
+  return fontSize;
+};
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -44,12 +62,28 @@ export default function Home() {
       ctx.fillStyle = "#333333";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.font = `${Math.floor(width / 18)}px "Times New Roman", serif`;
+      const nameBaseSize = Math.floor(width * NAME_BASE_SIZE_RATIO);
+      const nameFontSize = fitTextToWidth(
+        ctx,
+        payload.name || "Your Name",
+        nameBaseSize,
+        '"Times New Roman", serif',
+        width * 0.7
+      );
+      ctx.font = `${nameFontSize}px "Times New Roman", serif`;
       ctx.fillText(payload.name || "Your Name", width / 2, height * NAME_Y_RATIO);
 
       // Institution text
       ctx.fillStyle = "#333333";
-      ctx.font = `${Math.floor(width / 28)}px "Times New Roman", serif`;
+      const instBaseSize = Math.floor(width * INST_BASE_SIZE_RATIO);
+      const instFontSize = fitTextToWidth(
+        ctx,
+        `(${payload.institution})` || "Your Institution",
+        instBaseSize,
+        '"Times New Roman", serif',
+        width * 0.7
+      );
+      ctx.font = `${instFontSize}px "Times New Roman", serif`;
       ctx.fillText(
         `(${payload.institution})` || "Your Institution",
         width / 2,
@@ -126,8 +160,10 @@ export default function Home() {
                 className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-semibold text-black drop-shadow-sm"
                 style={{
                   top: `${NAME_Y_RATIO * 100}%`,
-                  fontSize: "clamp(28px, 4vw, 64px)",
+                  fontSize: "clamp(22px, 3.2vw, 51px)",
                   lineHeight: 1.1,
+                  maxWidth: "80%",
+                  wordBreak: "break-word",
                 }}
               >
                 {submitted.name || "Your Name"}
@@ -136,8 +172,10 @@ export default function Home() {
                 className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-medium text-black drop-shadow-sm"
                 style={{
                   top: `${INSTITUTION_Y_RATIO * 100}%`,
-                  fontSize: "clamp(16px, 2.2vw, 40px)",
+                  fontSize: "clamp(13px, 1.8vw, 32px)",
                   lineHeight: 1.2,
+                  maxWidth: "80%",
+                  wordBreak: "break-word",
                 }}
               >
                 {submitted.institution || "Your Institution"}
