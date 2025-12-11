@@ -3,6 +3,9 @@
 
 import { useState, type FormEvent } from "react";
 
+const NAME_Y_RATIO = 0.46;
+const INSTITUTION_Y_RATIO = 0.53;
+
 export default function Home() {
   const [name, setName] = useState("");
   const [institution, setInstitution] = useState("");
@@ -15,7 +18,7 @@ export default function Home() {
       img.crossOrigin = "anonymous";
       img.onload = () => resolve(img);
       img.onerror = reject;
-      img.src = "/cert.jpeg";
+      img.src = "/cert.jpg";
     });
 
   const generateAndDownload = async (payload: {
@@ -38,19 +41,19 @@ export default function Home() {
       ctx.drawImage(img, 0, 0, width, height);
 
       // Name text
-      ctx.fillStyle = "#b57a00";
+      ctx.fillStyle = "#333333";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.font = `${Math.floor(width / 18)}px "Times New Roman", serif`;
-      ctx.fillText(payload.name || "Your Name", width / 2, height * 0.52);
+      ctx.fillText(payload.name || "Your Name", width / 2, height * NAME_Y_RATIO);
 
       // Institution text
-      ctx.fillStyle = "#10643f";
+      ctx.fillStyle = "#333333";
       ctx.font = `${Math.floor(width / 28)}px "Times New Roman", serif`;
       ctx.fillText(
-        payload.institution || "Your Institution",
+        `(${payload.institution})` || "Your Institution",
         width / 2,
-        height * 0.62
+        height * INSTITUTION_Y_RATIO
       );
 
       const link = document.createElement("a");
@@ -110,18 +113,25 @@ export default function Home() {
 
         <section className="relative w-full overflow-hidden rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
           <div
-            className="relative aspect-video w-full overflow-hidden rounded-xl bg-white md:min-h-[420px]"
+            className="relative w-full overflow-hidden rounded-xl bg-white md:min-h-[420px]"
             style={{
-              backgroundImage: "url('/cert.jpeg')",
+              aspectRatio: "117 / 85",
+              backgroundImage: "url('/cert.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-8 text-center">
-              <div className="text-4xl font-semibold text-amber-700 drop-shadow-sm md:text-5xl">
+            <div className="absolute inset-0 px-8">
+              <div
+                className="absolute left-1/2 -translate-x-1/2 text-center text-4xl font-semibold text-black drop-shadow-sm md:text-5xl"
+                style={{ top: `${NAME_Y_RATIO * 100}%` }}
+              >
                 {submitted.name || "Your Name"}
               </div>
-              <div className="text-xl font-medium text-emerald-800 drop-shadow-sm md:text-2xl">
+              <div
+                className="absolute left-1/2 -translate-x-1/2 text-center text-xl font-medium text-black drop-shadow-sm md:text-2xl"
+                style={{ top: `${INSTITUTION_Y_RATIO * 100}%` }}
+              >
                 {submitted.institution || "Your Institution"}
               </div>
             </div>
