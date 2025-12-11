@@ -3,7 +3,7 @@
 
 import { useState, type FormEvent } from "react";
 
-const NAME_Y_RATIO = 0.46;
+const NAME_Y_RATIO = 0.44;
 const INSTITUTION_Y_RATIO = 0.53;
 
 export default function Home() {
@@ -121,16 +121,24 @@ export default function Home() {
               backgroundPosition: "center",
             }}
           >
-            <div className="absolute inset-0 px-8">
+            <div className="absolute inset-0 px-6 md:px-10">
               <div
-                className="absolute left-1/2 -translate-x-1/2 text-center text-4xl font-semibold text-black drop-shadow-sm md:text-5xl"
-                style={{ top: `${NAME_Y_RATIO * 100}%` }}
+                className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-semibold text-black drop-shadow-sm"
+                style={{
+                  top: `${NAME_Y_RATIO * 100}%`,
+                  fontSize: "clamp(28px, 4vw, 64px)",
+                  lineHeight: 1.1,
+                }}
               >
                 {submitted.name || "Your Name"}
               </div>
               <div
-                className="absolute left-1/2 -translate-x-1/2 text-center text-xl font-medium text-black drop-shadow-sm md:text-2xl"
-                style={{ top: `${INSTITUTION_Y_RATIO * 100}%` }}
+                className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-medium text-black drop-shadow-sm"
+                style={{
+                  top: `${INSTITUTION_Y_RATIO * 100}%`,
+                  fontSize: "clamp(16px, 2.2vw, 40px)",
+                  lineHeight: 1.2,
+                }}
               >
                 {submitted.institution || "Your Institution"}
               </div>
