@@ -81,7 +81,7 @@ export default function Home() {
         `(${payload.institution})` || "Your Institution",
         instBaseSize,
         '"Times New Roman", serif',
-        width * 0.7
+        width * 0.5
       );
       ctx.font = `${instFontSize}px "Times New Roman", serif`;
       ctx.fillText(
