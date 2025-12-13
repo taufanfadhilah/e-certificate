@@ -194,14 +194,6 @@ export default function Home() {
             <span className="text-zinc-600">Phone: 082218339682</span>
             <a
               className="text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-800"
-              href="https://cherrypick.studio/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              cherrypick.studio
-            </a>
-            <a
-              className="text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-800"
               href="https://www.instagram.com/taufanfadhilah/?hl=id"
               target="_blank"
               rel="noreferrer"
